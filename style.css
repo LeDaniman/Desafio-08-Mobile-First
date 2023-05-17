@@ -17,6 +17,7 @@
   --bg-body: hsl(var(--hue), 100%, 97%);
   --bg-text1: hsl(var(--hue), 18%, 79%);
   --bg-text2: hsl(var(--hue), 91%, 96%);
+  --bg-text2-span: hsl(var(--hue), 85%, 85%);
   --fc-header: hsl(0, 0%, 100%);
   --fc-primary: hsl(var(--hue), 84%, 12%);
   --fc-secundary: hsl(var(--hue), 17%, 35%);
@@ -27,8 +28,8 @@ body {
 }
 
 .page {
-  max-width: 384px;
-  margin: 0 auto;
+  max-width: clamp(38.4rem, 128rem);
+  margin: 0 auto 3.2rem;
   text-align: center;
 }
 
@@ -48,11 +49,15 @@ header img {
   animation: appear 1000ms backwards;
 }
 
+#logo2, #texto-maior {
+  display: none;
+}
 
-header p {
+header h1 {
   font-family: var(--ff-primary);
   color: var(--fc-header);
   font-size: var(--fs-heading);
+  font-weight: 400;
   line-height: 3.4rem;
   letter-spacing: 0.05em;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -64,46 +69,52 @@ header p {
   animation: lettering-appear 1000ms backwards;
 }
 
-main {
-  width: 32rem;
-  margin: 0 auto;
-}
-
-main p {
+header p {
   color: var(--fc-primary);
   font-family: var(--ff-texting);
   font-size: 1.2rem;
   line-height: 1.5rem;
   font-weight: 400;
 
+  margin: 0 auto 6.3rem;
+
   animation: lettering-appear 700ms 400ms backwards;
 }
 
-#text {
-  margin: 0 auto 6.3rem;
+#cards {
+  display: grid;
+  gap: 3.2rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+  max-width: 38.4rem;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 3.2rem;
-  margin-bottom: 6rem;
+main div:nth-child(5), main div:nth-child(6) {
+  display: none;
 }
+
 
 .card {
   position: relative;
-}
-
-.card img {
-  animation: downtop 700ms;
-  border-radius: 2rem;
+  display: block;
 
   transition: all 400ms;
   cursor: pointer;
 }
 
-.card img:hover {
+.card img {
+  width: 100%;
+  animation: downtop 700ms;
+  border-radius: 2rem;
+}
+
+.card:hover {
   transform: scale(1.05);
+}
+
+.card:hover p {
+  background: var(--bg-text2-span);
+
 }
 
 .card p {
@@ -123,6 +134,10 @@ section {
   right: 1.6rem;
 
   animation: topdown 700ms 400ms backwards;
+}
+
+footer {
+  display: none;
 }
 
 @keyframes topdown {
@@ -170,3 +185,136 @@ section {
     opacity: 1;
   }
 }
+
+@media (min-width: 700px) {
+
+  #cards {
+    grid-template-areas: "A B"
+    "D B"
+    "D C"
+    "E F";
+    min-width: 700px;
+  }
+
+    #cards div:nth-child(1){
+      grid-area: A;
+    }
+    
+    #cards div:nth-child(2){
+      grid-area: B;
+    }
+    
+    #cards div:nth-child(3){
+      grid-area: C;
+    }
+    
+    #cards div:nth-child(4){
+      grid-area: D;
+    }
+
+    #cards div:nth-child(5){
+      grid-area: E;
+      display: none;
+    }
+
+    #cards div:nth-child(6){
+      grid-area: F;
+      display: none;
+    }
+
+    header p {
+      font-size: 1.6rem;
+      line-height: 2.0rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    body::before {
+      width: 37.7rem;
+      height: 100%;
+    }
+
+    .page {
+      display: flex;
+    }
+
+    #logo1, #texto-menor {
+      display: none;
+    }
+
+    #logo2,  #texto-maior {
+      display: block;
+    }
+
+    header {
+      min-width: 37.7rem;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      line-height: 2.5rem;
+      color: var(--fc-header)
+    }
+
+    main {
+      margin: 0 auto;
+      max-height: 720px;
+    }
+
+    #cards {
+      display: grid;
+      grid-template-areas: 
+      "A B E"
+      "D B F"
+      "D C F";
+
+ 
+      margin: 0 auto;
+      padding: 60px;
+      max-width: fit-content;
+    }
+
+    #cards div:nth-child(1){
+      grid-area: A;
+    }
+    
+    #cards div:nth-child(2){
+      grid-area: B;
+    }
+    
+    #cards div:nth-child(3){
+      grid-area: C;
+    }
+    
+    #cards div:nth-child(4){
+      grid-area: D;
+    }
+
+    #cards div:nth-child(5){
+      grid-area: E;
+      display: block;
+    }
+
+    #cards div:nth-child(6){
+      grid-area: F;
+      display: block;
+    }
+
+    footer {
+      display: block;
+    
+      font-family: var(--ff-texting);
+      font-size: 14px;
+      line-height: 28px;
+      color: var(--fc-secundary);
+
+      margin-top: -1rem;
+    }
+
+    footer a {
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--fc-secundary);
+    }
+    
+  }
